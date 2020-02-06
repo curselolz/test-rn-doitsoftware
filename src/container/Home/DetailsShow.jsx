@@ -10,7 +10,8 @@ import getTasksList from '../../store/effects/getTasksList';
 import {storeNavigation, storeEdit} from '../../store';
 import styles from '../../styles';
 import getTimeFromDate from '../../utils/time';
-import { inputChangedDetails } from '../../store/events';
+import {inputChangedDetails} from '../../store/events';
+import editEffect from '../../store/effects/editEffect';
 
 const DetailsShow = navProp => {
   const inputData = [
@@ -25,7 +26,7 @@ const DetailsShow = navProp => {
   const {params} = state;
   const element = params;
   const canEdit = useStore(storeEdit);
-
+  canEdit && editEffect({oldData:element, newData:dataSubmit})
   return (
     <Container>
       <Content>
