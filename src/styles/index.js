@@ -1,4 +1,5 @@
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
+
 const width = {
   100: Dimensions.get('window').width,
   80: Dimensions.get('window').width * 0.8,
@@ -7,7 +8,7 @@ const width = {
   33: Dimensions.get('window').width * 0.33,
   32: Dimensions.get('window').width * 0.32,
   31: Dimensions.get('window').width * 0.31,
-  30: Dimensions.get('window').width * 0.30,
+  30: Dimensions.get('window').width * 0.3,
   29: Dimensions.get('window').width * 0.29,
   28: Dimensions.get('window').width * 0.28,
   27: Dimensions.get('window').width * 0.27,
@@ -20,31 +21,34 @@ const width = {
   5: Dimensions.get('window').width * 0.05,
 };
 
-const height = {
-  100: Dimensions.get('window').height,
-  80: Dimensions.get('window').height * 0.8,
-  60: Dimensions.get('window').height * 0.6,
-  40: Dimensions.get('window').height * 0.4,
-  20: Dimensions.get('window').height * 0.2,
-  10: Dimensions.get('window').height * 0.1,
-};
-export const styles = {
+const styles = {
   container: {
-    display:'flex',
+    display: 'flex',
     justifyContent: 'center',
-    alignItems:'center',
-    height:500,
+    alignItems: 'center',
+    height: 500,
   },
   input: {
-    width: width['60']
+    width: width['80'],
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey',
   },
   textCenter: {
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   viewSwitch: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical:20,
-  }
-}
+    marginVertical: 20,
+  },
+  btnAdd: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    height: 50,
+    width: 50,
+    marginBottom: 25,
+    marginRight: 25,
+  },
+};
 
+export default styles;
