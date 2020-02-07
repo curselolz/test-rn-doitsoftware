@@ -2,7 +2,6 @@ import React from 'react';
 import {useStore} from 'effector-react';
 import {Container, Content, Card, CardItem, Body, Button, Text, Input} from 'native-base';
 import {View} from 'react-native';
-import addTaskEffect from '../../store/effects/addEffect';
 import deleteTaskEffect from '../../store/effects/deleteEffect';
 import storeInputDetails from '../../store/storeInputDetails';
 import getTasksList from '../../store/effects/getTasksList';
@@ -83,15 +82,11 @@ const DetailsShow = navProp => {
         <Button
           light
           onPress={() => {
-            if (element.title === 'empty') {
-              addTaskEffect(dataSubmit);
-            } else {
-              deleteTaskEffect(element.id);
-            }
+            deleteTaskEffect(element.id);
             nav.navigate('Home');
             getTasksList();
           }}>
-          <Text>{element.title === 'empty' ? 'Add event' : 'Delete event'}</Text>
+          <Text>Delete event</Text>
         </Button>
       </Content>
     </Container>

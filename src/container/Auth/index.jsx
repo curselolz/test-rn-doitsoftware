@@ -10,7 +10,6 @@ import {storeCheckbox, storeInput} from '../../store';
 import {inputChanged, toggleSwitch, saveNavToStore} from '../../store/events';
 import {addNewUser} from '../../store/effects/authEffect';
 import {loginUser} from '../../store/effects/authEffect/login';
-import getTasksList from '../../store/effects/getTasksList';
 
 const Auth = ({navigation}) => {
   const switchValue = useStore(storeCheckbox);
