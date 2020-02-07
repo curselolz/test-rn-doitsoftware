@@ -10,10 +10,14 @@ import {storeCheckbox, storeInput} from '../../store';
 import {inputChanged, toggleSwitch, saveNavToStore} from '../../store/events';
 import {addNewUser} from '../../store/effects/authEffect';
 import {loginUser} from '../../store/effects/authEffect/login';
+import getTasksList from '../../store/effects/getTasksList';
 
 const Auth = ({navigation}) => {
   const switchValue = useStore(storeCheckbox);
-  const inputData = ['Username', 'Password'];
+  const inputData = [
+    {key: 1, title: 'Username'},
+    {key: 2, title: 'Password'},
+  ];
   const inputSubmitValue = useStore(storeInput);
   saveNavToStore(navigation);
   AsyncStorage.getItem('authToken')
@@ -39,10 +43,11 @@ const Auth = ({navigation}) => {
           <Item style={styles.input}>
             {inputData.map(el => (
               <Input
-                placeholder={el}
+                key={el.id}
+                placeholder={el.title}
                 onChangeText={text =>
                   inputChanged({
-                    name: el,
+                    name: el.title,
                     value: text,
                   })
                 }

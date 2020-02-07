@@ -16,6 +16,7 @@ import getTimeFromDate from '../../utils/time';
 
 const Feed = ({navigation}) => {
   useEffect(() => {
+    getTasksList();
     return () => {
       AsyncStorage.removeItem('authToken');
     };

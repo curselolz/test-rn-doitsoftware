@@ -36,6 +36,7 @@ const DetailsShow = navProp => {
               <CardItem key={el.id}>
                 <Body>
                   <Input
+                    key={el.id}
                     style={styles.input}
                     placeholder={element[el.title]}
                     // value={}
