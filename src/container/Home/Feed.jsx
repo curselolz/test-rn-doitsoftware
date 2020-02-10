@@ -16,7 +16,7 @@ import getTimeFromDate from '../../utils/time';
 
 const Feed = ({navigation}) => {
   useEffect(() => {
-    // getTasksList();
+    getTasksList();
     return () => {
       AsyncStorage.removeItem('authToken');
     };
@@ -26,7 +26,7 @@ const Feed = ({navigation}) => {
     <ListItem
       key={element.id}
       noIndent
-      style={{borderWidth:1,borderColor:'red', flexGrow: 1, backgroundColor: '#cde1f9'}}
+      style={{flexGrow: 1, backgroundColor: '#cde1f9'}}
       onPress={() => navigation.navigate('DetailsShow', element)}>
       <Left>
         <Text>{element.title}</Text>

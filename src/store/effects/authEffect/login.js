@@ -26,6 +26,5 @@ loginUser.done.watch(({result}) => {
 });
 
 loginUser.fail.watch(({error, params}) => {
-  console.error(error); // rejected value
-  console.log('//////');
+  console.error(error);
 });

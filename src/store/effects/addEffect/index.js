@@ -20,4 +20,12 @@ addTaskEffect.use(dataToAdd => {
   });
 });
 
+addTaskEffect.done.watch(({ result }) => {
+  console.log(result);
+});
+
+addTaskEffect.fail.watch(({ error, params }) => {
+  console.error(error);
+});
+
 export default addTaskEffect;
