@@ -5,6 +5,7 @@ import {finishRefresh, fillData} from '../../events';
 const getTasksList = createEffect('get lists');
 
 getTasksList.use(() => {
+  console.log(axios.defaults)
   return axios({
     ...axios.defaults,
     method: 'get',

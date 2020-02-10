@@ -49,6 +49,19 @@ const styles = {
     marginBottom: 25,
     marginRight: 25,
   },
+  errorInput: {
+    borderBottomColor: 'red',
+    borderBottomWidth: 1,
+  },
+  errorValidation: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: width['80'],
+    borderBottomColor: 'red',
+    borderBottomWidth: 1,
+    marginBottom:30,
+  }
 };
 
 export default styles;

@@ -22,3 +22,9 @@ export const saveNavToStore = createEvent('Save nav');
 export const openForEdit = createEvent('Open edit');
 
 export const finishRefresh = createEvent('Finish refresh');
+
+export const errorHandling = createEvent('Error handler');
+export const waitingHandler = createEvent('Wait response');
+export const clearValue = createEvent('Clear value');
+
+export const clickAddData = createEvent('Click data');

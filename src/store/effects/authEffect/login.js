@@ -8,7 +8,6 @@ export const loginUser = createEffect('Add new user');
 
 loginUser.use(data => {
   return axios({
-    ...axios.defaults,
     method: 'post',
     data: {
       email: data[0].value,
@@ -19,7 +18,9 @@ loginUser.use(data => {
 });
 
 loginUser.done.watch(({result}) => {
+  console.log(result)
   if (result && result.data.token) {
+    console.log('1')
     setAxiosDefaults(result.data.token);
     AsyncStorage.setItem('authToken', JSON.stringify(result.data.token));
   }

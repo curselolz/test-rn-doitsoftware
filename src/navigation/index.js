@@ -1,6 +1,6 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from '../container/Home/Feed';
 import Details from '../container/Home/Details';
 import DetailsShow from '../container/Home/DetailsShow';

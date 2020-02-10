@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {ActivityIndicator} from 'react-native';
 import {useStore} from 'effector-react';
 import {Container, Content, Card, CardItem, Body, Input, Button, Text} from 'native-base';
-import {inputChangedDetails} from '../../store/events';
+import {inputChangedDetails, clickAddData} from '../../store/events';
 import addTaskEffect from '../../store/effects/addEffect';
 import storeInputDetails from '../../store/storeInputDetails';
 
 import styles from '../../styles';
+import {storeError, storeWait, storeClicked} from '../../store';
+import validationField from '../../utils/fieldValidation';
+import getTasksList from '../../store/effects/getTasksList';
 
 const Details = navProp => {
   const inputData = [
@@ -15,6 +19,14 @@ const Details = navProp => {
   ];
   const dataSubmit = useStore(storeInputDetails);
   const {navigation} = navProp;
+  const erorField = useStore(storeError);
+  const waitResponse = useStore(storeWait);
+  const [waitResp, WaitFieldSet] = useState(waitResponse);
+  const isClicked = useStore(storeClicked);
+  if (isClicked && erorField && !waitResp) {
+    navigation.navigate('Home');
+    getTasksList();
+  }
   return (
     <Container>
       <Content>
@@ -30,13 +42,20 @@ const Details = navProp => {
               </Body>
             </CardItem>
           ))}
+          {(!erorField || !validationField(dataSubmit)) && (
+            <CardItem>
+              <Text style={styles.errorValidation}>Eror validation empty or uppercase letter</Text>
+            </CardItem>
+          )}
           <Button
             light
             onPress={() => {
-              addTaskEffect(dataSubmit);
-              navigation.navigate('Home');
+              if (validationField(dataSubmit)) {
+                addTaskEffect(dataSubmit);
+                clickAddData(true);
+              }
             }}>
-            <Text>Add event</Text>
+            {waitResp ? <ActivityIndicator size="large" color="#0000ff" /> : <Text>Add event</Text>}
           </Button>
         </Card>
       </Content>

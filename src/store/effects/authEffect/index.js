@@ -3,6 +3,7 @@ import {createEffect} from 'effector';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {BASE_URL, setAxiosDefaults} from '../../../config';
+import { errorHandling } from '../../events';
 
 export const getData = createEffect('Fetch data');
 export const addNewUser = createEffect('Add new user');
@@ -28,4 +29,7 @@ addNewUser.done.watch(({result}) => {
 
 addNewUser.fail.watch(({error}) => {
   console.error(error);
+  if (error) {
+    errorHandling(false);
+  }
 });

@@ -14,6 +14,10 @@ import {
   changeSortOrder,
   openForEdit,
   finishRefresh,
+  errorHandling,
+  clearValue,
+  waitingHandler,
+  clickAddData,
 } from './events';
 
 const sortByName = (data, sortOrder) => orderBy(data, 'title', sortOrder);
@@ -71,7 +75,8 @@ export const storeInput = createStore([]).on(inputChanged, (oldState, newElement
     newArr[index] = newElement;
   }
   return newArr;
-});
+})
+.on(clearValue, () => []);
 
 export const storeCheckbox = createStore(false).on(toggleSwitch, (oldState, payload) => payload);
 
@@ -81,7 +86,14 @@ export const storeEdit = createStore(false).on(openForEdit, (oldState, payload) 
 
 export const storeRefresh = createStore(false).on(finishRefresh, (oldState, payload) => payload);
 
-storeSort.watch(console.log);
-storeSortOrder.watch(console.log);
-twoMergedStore.watch(console.log);
-storeEdit.watch(console.log);
+export const storeError = createStore(false).on(errorHandling, (oldState, payload) => payload);
+
+export const storeWait = createStore(false).on(waitingHandler, (oldState, payload) => payload);
+
+export const storeClicked = createStore(false).on(clickAddData, (oldState, payload) => payload);
+
+// storeSort.watch(console.log);
+// storeSortOrder.watch(console.log);
+// twoMergedStore.watch(console.log);
+// storeEdit.watch(console.log);
+storeToken.watch(console.log);

@@ -1,5 +1,6 @@
 import {createEffect} from 'effector';
 import axios from 'axios';
+import { errorHandling, waitingHandler} from '../../events';
 
 const addTaskEffect = createEffect('add task');
 
@@ -20,12 +21,23 @@ addTaskEffect.use(dataToAdd => {
   });
 });
 
-addTaskEffect.done.watch(({ result }) => {
+addTaskEffect.done.watch(({result}) => {
   console.log(result);
+  errorHandling(true);
+  if (result.status === 201) {
+    errorHandling(true);
+  }
 });
 
-addTaskEffect.fail.watch(({ error, params }) => {
-  console.error(error);
+addTaskEffect.pending.watch(pending => {
+  console.log(pending, 'PENDING');
+  waitingHandler(pending);
+})
+
+
+addTaskEffect.fail.watch(({error, params}) => {
+  console.log(error)
+  errorHandling(false);
 });
 
 export default addTaskEffect;

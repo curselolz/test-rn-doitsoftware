@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import {twoMergedStore, storeRefresh} from '../../store';
-import {changeSort} from '../../store/events';
+import {changeSort, clearValue} from '../../store/events';
 import getTasksList from '../../store/effects/getTasksList';
 
 import styles from '../../styles';
@@ -19,6 +19,7 @@ const Feed = ({navigation}) => {
     getTasksList();
     return () => {
       AsyncStorage.removeItem('authToken');
+      clearValue();
     };
   });
 
