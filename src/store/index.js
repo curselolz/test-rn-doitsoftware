@@ -17,8 +17,6 @@ import {
   errorHandling,
   clearValue,
   waitingHandler,
-  clickAddData,
-  clearDataClicked,
 } from './events';
 
 const sortByName = (data, sortOrder) => orderBy(data, 'title', sortOrder);
@@ -91,10 +89,6 @@ export const storeRefresh = createStore(false).on(finishRefresh, (oldState, payl
 export const storeError = createStore(false).on(errorHandling, (oldState, payload) => payload);
 
 export const storeWait = createStore(false).on(waitingHandler, (oldState, payload) => payload);
-
-export const storeClicked = createStore(false)
-  .on(clickAddData, (oldState, payload) => payload)
-  .on(clearDataClicked, (oldState, payload) => false);
 
 // storeSort.watch(console.log);
 // storeSortOrder.watch(console.log);

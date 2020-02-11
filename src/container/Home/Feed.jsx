@@ -3,12 +3,11 @@ import {useList, useStore} from 'effector-react';
 import {Container, Content, List, ListItem, Text, Button, Left, Body, Right} from 'native-base';
 import {withNavigation} from 'react-navigation';
 import {View, Picker, RefreshControl} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import {twoMergedStore, storeRefresh} from '../../store';
-import {changeSort, clearValue, clearDataClicked} from '../../store/events';
+import {changeSort} from '../../store/events';
 import getTasksList from '../../store/effects/getTasksList';
 
 import styles from '../../styles';
@@ -18,15 +17,6 @@ const Feed = ({navigation}) => {
   useEffect(() => {
     getTasksList();
   }, []);
-
-  // useEffect(() => {
-  //   // ();
-  //   clearDataClicked();
-  //   return () => {
-  //     AsyncStorage.removeItem('authToken');
-  //     clearValue();
-  //   };
-  // });
 
   const list = useList(twoMergedStore, element => (
     <ListItem

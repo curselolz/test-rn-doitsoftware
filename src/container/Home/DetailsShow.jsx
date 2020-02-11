@@ -38,7 +38,6 @@ const DetailsShow = navProp => {
                     key={el.id}
                     style={styles.input}
                     placeholder={element[el.title]}
-                    // value={element[el.title]}
                     onChangeText={text => inputChangedDetails({name: el.title, value: text})}
                   />
                 </Body>
@@ -84,7 +83,6 @@ const DetailsShow = navProp => {
           onPress={() => {
             if(canEdit) {
               editEffect({ oldData: element, newData: dataSubmit, nav:navProp });
-              console.log('can edit')
             } else {
               deleteTaskEffect(element.id);
               navigation.navigate('Home')

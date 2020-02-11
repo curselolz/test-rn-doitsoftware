@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Container, Form, Item, Input, Text, Button, Content} from 'native-base';
 import {Switch, View} from 'react-native';
 import {useStore} from 'effector-react';
 import {withNavigation} from 'react-navigation';
 import PropTypes from 'prop-types';
-import AsyncStorage from '@react-native-community/async-storage';
 import styles from '../../styles';
 import {storeCheckbox, storeInput, storeError} from '../../store';
-import {inputChanged, toggleSwitch, saveNavToStore, clearValue} from '../../store/events';
+import {inputChanged, toggleSwitch, saveNavToStore} from '../../store/events';
 import {addNewUser} from '../../store/effects/authEffect';
 import {loginUser} from '../../store/effects/authEffect/login';
 import validationField from '../../utils/fieldValidation';
@@ -20,17 +19,8 @@ const Auth = ({navigation}) => {
   ];
   const inputSubmitValue = useStore(storeInput);
   saveNavToStore(navigation);
-  // AsyncStorage.getItem('authToken')
-  //   .then(value => {
-  //     if (value !== null) {
-  //       navigation.navigate('Home');
-  //     }
-  //   })
-  //   .catch(err => console.log(err));
   const errValue = useStore(storeError);
-  console.log(errValue, 'err value');
   const emptyValue = inputSubmitValue.some(el => el.value === '');
-  // if (!errValue)
   return (
     <Container style={styles.container}>
       <Content
