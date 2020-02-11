@@ -20,14 +20,17 @@ const Auth = ({navigation}) => {
   ];
   const inputSubmitValue = useStore(storeInput);
   saveNavToStore(navigation);
-  AsyncStorage.getItem('authToken')
-    .then(value => {
-      if (value !== null) {
-        navigation.navigate('Home');
-      }
-    })
-    .catch(err => console.log(err));
-    const errValue = useStore(storeError);
+  // AsyncStorage.getItem('authToken')
+  //   .then(value => {
+  //     if (value !== null) {
+  //       navigation.navigate('Home');
+  //     }
+  //   })
+  //   .catch(err => console.log(err));
+  const errValue = useStore(storeError);
+  console.log(errValue, 'err value');
+  const emptyValue = inputSubmitValue.some(el => el.value === '');
+  // if (!errValue)
   return (
     <Container style={styles.container}>
       <Content
@@ -62,7 +65,7 @@ const Auth = ({navigation}) => {
             <Text>Login / Register</Text>
             <Switch onValueChange={val => toggleSwitch(val)} value={switchValue} />
           </View>
-          {(!validationField(inputSubmitValue) || !errValue) && (
+          {errValue && (
             <View style={styles.viewSwitch}>
               <Text>Err validation </Text>
             </View>
@@ -70,17 +73,12 @@ const Auth = ({navigation}) => {
           <Button
             style={styles.textCenter}
             onPress={() => {
-              clearValue();
               if (switchValue) {
-                if (validationField(inputSubmitValue) || errValue) {
-                  addNewUser(inputSubmitValue);
-                  navigation.navigate('Home');
+                if (validationField(inputSubmitValue)) {
+                  addNewUser({data: inputSubmitValue, nav: navigation});
                 }
-              } else {
-                if (validationField(inputSubmitValue) || errValue) {
-                  loginUser(inputSubmitValue);
-                  navigation.navigate('Home');
-                }
+              } else if (inputSubmitValue.length === 2 && !emptyValue) {
+                loginUser({data: inputSubmitValue, nav: navigation});
               }
             }}>
             <Text>{'log in'.toUpperCase()}</Text>

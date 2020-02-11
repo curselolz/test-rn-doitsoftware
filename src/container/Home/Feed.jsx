@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import {twoMergedStore, storeRefresh} from '../../store';
-import {changeSort, clearValue} from '../../store/events';
+import {changeSort, clearValue, clearDataClicked} from '../../store/events';
 import getTasksList from '../../store/effects/getTasksList';
 
 import styles from '../../styles';
@@ -17,11 +17,16 @@ import getTimeFromDate from '../../utils/time';
 const Feed = ({navigation}) => {
   useEffect(() => {
     getTasksList();
-    return () => {
-      AsyncStorage.removeItem('authToken');
-      clearValue();
-    };
-  });
+  }, []);
+
+  // useEffect(() => {
+  //   // ();
+  //   clearDataClicked();
+  //   return () => {
+  //     AsyncStorage.removeItem('authToken');
+  //     clearValue();
+  //   };
+  // });
 
   const list = useList(twoMergedStore, element => (
     <ListItem
@@ -46,6 +51,7 @@ const Feed = ({navigation}) => {
   return (
     <Container>
       <Content refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getTasksList} />}>
+      {/* <Content> */}
         <List>{list}</List>
       </Content>
       <View style={{alignItems: 'flex-end'}}>

@@ -25,7 +25,7 @@ const DetailsShow = navProp => {
   const {params} = state;
   const element = params;
   const canEdit = useStore(storeEdit);
-  canEdit && editEffect({oldData:element, newData:dataSubmit})
+  const editDone = useStore(storeEdit);
   return (
     <Container>
       <Content>
@@ -38,7 +38,7 @@ const DetailsShow = navProp => {
                     key={el.id}
                     style={styles.input}
                     placeholder={element[el.title]}
-                    // value={}
+                    // value={element[el.title]}
                     onChangeText={text => inputChangedDetails({name: el.title, value: text})}
                   />
                 </Body>
@@ -82,11 +82,16 @@ const DetailsShow = navProp => {
         <Button
           light
           onPress={() => {
-            deleteTaskEffect(element.id);
-            nav.navigate('Home');
+            if(canEdit) {
+              editEffect({ oldData: element, newData: dataSubmit, nav:navProp });
+              console.log('can edit')
+            } else {
+              deleteTaskEffect(element.id);
+              navigation.navigate('Home')
+            }
             getTasksList();
           }}>
-          <Text>Delete event</Text>
+          <Text>{canEdit ? 'Edit task' : 'Delete event'}</Text>
         </Button>
       </Content>
     </Container>

@@ -20,6 +20,7 @@ export const inputChangedPass = createEvent('Input changed pass');
 export const saveNavToStore = createEvent('Save nav');
 
 export const openForEdit = createEvent('Open edit');
+export const finishForEdit = createEvent('Finish edit');
 
 export const finishRefresh = createEvent('Finish refresh');
 
@@ -28,3 +29,4 @@ export const waitingHandler = createEvent('Wait response');
 export const clearValue = createEvent('Clear value');
 
 export const clickAddData = createEvent('Click data');
+export const clearDataClicked = createEvent('Clear data');

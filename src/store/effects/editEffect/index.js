@@ -1,9 +1,10 @@
 import {createEffect} from 'effector';
 import axios from 'axios';
-
+import { errorHandling} from '../../events';
 const editEffect = createEffect('edit task');
 
 editEffect.use(dataToEdit => {
+  console.log(dataToEdit)
   return axios({
     ...axios.defaults,
     url: `/tasks/${dataToEdit.oldData.id}`,
@@ -11,16 +12,14 @@ editEffect.use(dataToEdit => {
     data: {
       title: dataToEdit.newData.length > 0 ? dataToEdit.newData[0].value : dataToEdit.oldData.title,
     },
-  });
+  })
+    .then(res => {
+      console.log(res)
+      errorHandling(false);
+      dataToEdit.nav.navigation.navigate('Home');
+    })
+    .catch(err => errorHandling(true));
 });
 
-editEffect.done.watch(({ result }) => {
-  console.log(result);
-});
-
-editEffect.fail.watch(({ error, params }) => {
-  console.error(error); // rejected value
-  console.log('//////');
-});
 
 export default editEffect;

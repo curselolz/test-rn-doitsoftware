@@ -18,6 +18,7 @@ import {
   clearValue,
   waitingHandler,
   clickAddData,
+  clearDataClicked,
 } from './events';
 
 const sortByName = (data, sortOrder) => orderBy(data, 'title', sortOrder);
@@ -66,17 +67,18 @@ export const twoMergedStore = combine(
 
 export const storeToken = createStore({}).on(fillAuthToken, (oldState, payload) => payload);
 
-export const storeInput = createStore([]).on(inputChanged, (oldState, newElement) => {
-  const index = oldState.findIndex(({name}) => name === newElement.name);
-  let newArr = [...oldState];
-  if (index === -1) {
-    newArr = [...newArr, newElement];
-  } else {
-    newArr[index] = newElement;
-  }
-  return newArr;
-})
-.on(clearValue, () => []);
+export const storeInput = createStore([])
+  .on(inputChanged, (oldState, newElement) => {
+    const index = oldState.findIndex(({name}) => name === newElement.name);
+    let newArr = [...oldState];
+    if (index === -1) {
+      newArr = [...newArr, newElement];
+    } else {
+      newArr[index] = newElement;
+    }
+    return newArr;
+  })
+  .on(clearValue, () => []);
 
 export const storeCheckbox = createStore(false).on(toggleSwitch, (oldState, payload) => payload);
 
@@ -90,7 +92,9 @@ export const storeError = createStore(false).on(errorHandling, (oldState, payloa
 
 export const storeWait = createStore(false).on(waitingHandler, (oldState, payload) => payload);
 
-export const storeClicked = createStore(false).on(clickAddData, (oldState, payload) => payload);
+export const storeClicked = createStore(false)
+  .on(clickAddData, (oldState, payload) => payload)
+  .on(clearDataClicked, (oldState, payload) => false);
 
 // storeSort.watch(console.log);
 // storeSortOrder.watch(console.log);
