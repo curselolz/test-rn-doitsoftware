@@ -4,7 +4,6 @@ import { errorHandling} from '../../events';
 const editEffect = createEffect('edit task');
 
 editEffect.use(dataToEdit => {
-  console.log(dataToEdit)
   return axios({
     ...axios.defaults,
     url: `/tasks/${dataToEdit.oldData.id}`,
@@ -14,7 +13,6 @@ editEffect.use(dataToEdit => {
     },
   })
     .then(res => {
-      console.log(res)
       errorHandling(false);
       dataToEdit.nav.navigation.navigate('Home');
     })

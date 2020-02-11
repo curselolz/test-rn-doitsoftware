@@ -26,11 +26,3 @@ loginUser.use(dataObj => {
     })
     .catch(err => errorHandling(true));
 });
-
-// loginUser.done.watch(({result}) => {
-// });
-
-// loginUser.fail.watch(({error, params}) => {
-//   // console.error(error);
-//   errorHandling(true);
-// });

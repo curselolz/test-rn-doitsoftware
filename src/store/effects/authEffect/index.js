@@ -3,7 +3,7 @@ import {createEffect} from 'effector';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {BASE_URL, setAxiosDefaults} from '../../../config';
-import { errorHandling } from '../../events';
+import {errorHandling} from '../../events';
 
 export const getData = createEffect('Fetch data');
 export const addNewUser = createEffect('Add new user');
@@ -28,15 +28,7 @@ addNewUser.use(dataWithNav => {
     .catch(err => errorHandling(true));
 });
 
-addNewUser.done.watch(({result}) => {
-  // if (result && result.data.token) {
-  //   setAxiosDefaults(result.data.token);
-  //   AsyncStorage.setItem('authToken', JSON.stringify(result.data.token));
-  // }
-});
-
 addNewUser.fail.watch(({error}) => {
-  console.error(error);
   if (error) {
     errorHandling(false);
   }

@@ -5,7 +5,6 @@ import {errorHandling, waitingHandler} from '../../events';
 const addTaskEffect = createEffect('add task');
 
 addTaskEffect.use(dataToAdd => {
-  console.log(dataToAdd)
   return axios({
     ...axios.defaults,
     url: '/tasks',
@@ -30,16 +29,12 @@ addTaskEffect.use(dataToAdd => {
 });
 
 addTaskEffect.pending.watch(pending => {
-  console.log(pending, 'PENDING');
   waitingHandler(pending);
 });
 
 addTaskEffect.done.watch(({result}) => {
   waitingHandler(false);
-
 });
-
-
 
 addTaskEffect.fail.watch(({error, params}) => {
   waitingHandler(false);
