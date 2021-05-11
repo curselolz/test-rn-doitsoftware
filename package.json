@@ -15,7 +15,7 @@
     "axios": "^0.19.2",
     "effector": "^20.11.5",
     "effector-react": "^20.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "native-base": "^2.13.8",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
